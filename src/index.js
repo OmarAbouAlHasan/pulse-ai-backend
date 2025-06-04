@@ -1,7 +1,7 @@
-const express = require("express");
+ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const OpenAI = require("openai");
+const { OpenAI } = require("openai"); // ✅ Corrected import
 require("dotenv").config();
 
 const app = express();
@@ -22,7 +22,7 @@ app.post("/ask-ai", async (req, res) => {
         {
           role: "system",
           content:
-            "You are a helpful Cyprus travel guide AI. Suggest things to do, events, and venues based on user requests. Your replies should be short and easy to understand.",
+            "You are a helpful Cyprus travel guide AI. Suggest things to do, events, and venues based on user requests.",
         },
         {
           role: "user",
@@ -33,7 +33,7 @@ app.post("/ask-ai", async (req, res) => {
 
     res.json({ response: completion.choices[0].message.content });
   } catch (error) {
-    console.error("OpenAI API error:", error);
+    console.error("OpenAI API error:", error.message);
     res.status(500).json({ error: "Failed to get response from OpenAI" });
   }
 });
