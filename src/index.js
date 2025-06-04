@@ -1,7 +1,7 @@
- const express = require("express");
+const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const { OpenAI } = require("openai"); // ✅ Corrected import
+const { OpenAI } = require("openai");
 require("dotenv").config();
 
 const app = express();
@@ -17,7 +17,7 @@ app.post("/ask-ai", async (req, res) => {
 
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-4",
+      model: "gpt-3.5-turbo", // ✅ Changed to free model
       messages: [
         {
           role: "system",
